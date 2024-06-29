@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { ReactComponent as IssueIcon } from "../icons/issue.svg";
 import { ReactComponent as StartIcon } from "../icons/star.svg";
@@ -15,7 +15,7 @@ import RepoDetails from "./RepoDetails";
 const RepoCard = ({ repo, selectedRepo, handleSelectRepo }) => {
 	const isSelected = selectedRepo === repo.id;
 
-	const pushedAt = () => {
+	const pushedAt = useMemo(() => {
 		const pushedAt = new Date(repo.pushed_at);
 		const options = {
 			day: "2-digit",
@@ -26,7 +26,7 @@ const RepoCard = ({ repo, selectedRepo, handleSelectRepo }) => {
 			hour12: true,
 		};
 		return pushedAt.toLocaleDateString("en-US", options);
-	}
+	},[repo.pushed_at]);
 
 	return (
 		<Card
